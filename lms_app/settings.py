@@ -34,6 +34,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+WEBSITE_URL = "http://127.0.0.1:8000"
+
 # Added
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
@@ -43,9 +45,6 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
-
-# Application definition
-
 
 # Added
 REST_FRAMEWORK = {
@@ -57,6 +56,11 @@ REST_FRAMEWORK = {
     ],
 }
 
+
+# Application definition
+
+
+# Added
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
