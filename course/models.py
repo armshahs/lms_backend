@@ -33,6 +33,12 @@ class Course(models.Model):
     long_description = models.TextField(blank=True, null=True)
     categories = models.ManyToManyField(Category)
     created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(
+        User,
+        related_name="courses",
+        on_delete=models.CASCADE,
+        default=2,
+    )
     image = models.ImageField(upload_to="uploads", blank=True, null=True)
 
     def __str__(self):
@@ -66,10 +72,12 @@ class Lesson(models.Model):
 
     ARTICLE = "article"
     QUIZ = "quiz"
+    VIDEO = "video"
 
     CHOICES_LESSON_TYPE = (
         (ARTICLE, "Article"),
         (QUIZ, "Quiz"),
+        (VIDEO, "Video"),
     )
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -83,6 +91,7 @@ class Lesson(models.Model):
 
     status = models.CharField(max_length=20, choices=CHOICES_STATUS, default=PUBLISHED)
     type = models.CharField(max_length=20, choices=CHOICES_LESSON_TYPE, default=ARTICLE)
+    youtube_id = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -111,3 +120,21 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Quiz(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    course = models.ForeignKey(Course, related_name="quizzes", on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, related_name="quizzes", on_delete=models.CASCADE)
+    question = models.CharField(max_length=200, null=True)
+    answer = models.CharField(max_length=200, null=True)
+    option1 = models.CharField(max_length=200, null=True)
+    option2 = models.CharField(max_length=200, null=True)
+    option3 = models.CharField(max_length=200, null=True)
+    option4 = models.CharField(max_length=200, null=True)
+
+    class Meta:
+        verbose_name_plural = "Quizzes"
+
+    def __str__(self):
+        return self.question + " - " + str(self.course) + " - " + str(self.lesson)

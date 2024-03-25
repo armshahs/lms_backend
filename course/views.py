@@ -8,12 +8,16 @@ from rest_framework.decorators import (
     authentication_classes,
 )
 
+from django.contrib.auth.models import User
+
 from .serializers import (
     CourseListSerializer,
     CategorySerializer,
     CourseDetailSerializer,
     LessonListSerializer,
     CommentSerializer,
+    QuizSerializer,
+    UserSerializer,
 )
 from .models import Course, Category, Lesson, Comment
 
@@ -97,3 +101,26 @@ def get_comments(request, course_slug, lesson_slug):
     comments = lesson.comments.all()
     serializer = CommentSerializer(comments, many=True)
     return Response(serializer.data)
+
+
+@api_view(["GET"])
+def get_quiz(request, course_slug, lesson_slug):
+    course = Course.objects.get(slug=course_slug)
+    lesson = Lesson.objects.filter(course=course).get(slug=lesson_slug)
+
+    quiz = lesson.quizzes.all()
+    serializer = QuizSerializer(quiz, many=True)
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
+def get_author_courses(request, user_id):
+    author = User.objects.get(id=user_id)
+    courses = author.courses.all()
+
+    user_serializer = UserSerializer(author)
+    courses_serializer = CourseListSerializer(courses, many=True)
+
+    return Response(
+        {"created_by": user_serializer.data, "courses": courses_serializer.data}
+    )

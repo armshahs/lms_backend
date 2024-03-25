@@ -48,6 +48,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 # Added
 REST_FRAMEWORK = {
+    "DATETIME_FORMAT": "%d.%m.%Y  %H:%M",
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.TokenAuthentication",
     ),
@@ -75,6 +76,7 @@ INSTALLED_APPS = [
     "djoser",
     # Created apps added below
     "course",
+    "activity",
 ]
 
 MIDDLEWARE = [
@@ -149,7 +151,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+# changed timezone to ist from the previous 'UTC'
+TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
 

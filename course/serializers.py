@@ -1,5 +1,16 @@
 from rest_framework import serializers
-from .models import Category, Course, Lesson, Comment, Category
+from django.contrib.auth.models import User
+from .models import Category, Course, Lesson, Comment, Category, Quiz
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+        )
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -29,6 +40,7 @@ class CourseListSerializer(serializers.ModelSerializer):
 
 class CourseDetailSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(read_only=True, many=True)
+    created_by = UserSerializer(many=False)
 
     class Meta:
         model = Course
@@ -40,6 +52,7 @@ class CourseDetailSerializer(serializers.ModelSerializer):
             "short_description",
             "long_description",
             "categories",
+            "created_by",
         )
 
 
@@ -50,8 +63,10 @@ class LessonListSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "slug",
+            "type",
             "short_description",
             "long_description",
+            "youtube_id",
         )
 
 
@@ -63,4 +78,20 @@ class CommentSerializer(serializers.ModelSerializer):
             "name",
             "content",
             "created_at",
+        )
+
+
+class QuizSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz
+        fields = (
+            "id",
+            "course_id",
+            "lesson_id",
+            "question",
+            "answer",
+            "option1",
+            "option2",
+            "option3",
+            "option4",
         )
