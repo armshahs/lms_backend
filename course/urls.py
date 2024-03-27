@@ -10,6 +10,8 @@ urlpatterns = [
         get_author_courses,
         name="get_author_courses",
     ),
+    path("create/", create_course, name="create_course"),
+    path("create-lesson/<slug:course_slug>/", create_lesson, name="create_lesson"),
     path("<slug:slug>/", get_course_detail, name="get_course_detail"),
     path(
         "<slug:course_slug>/<slug:lesson_slug>/",

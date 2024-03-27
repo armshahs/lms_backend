@@ -26,6 +26,17 @@ class Category(models.Model):
 
 
 class Course(models.Model):
+
+    DRAFT = "draft"
+    IN_REVIEW = "in_review"
+    PUBLISHED = "published"
+
+    STATUS_CHOICES = (
+        (DRAFT, "Draft"),
+        (IN_REVIEW, "In_Review"),
+        (PUBLISHED, "Published"),
+    )
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     slug = models.SlugField(blank=True, null=True)
@@ -40,6 +51,7 @@ class Course(models.Model):
         default=2,
     )
     image = models.ImageField(upload_to="uploads", blank=True, null=True)
+    status = models.CharField(max_length=25, choices=STATUS_CHOICES, default=DRAFT)
 
     def __str__(self):
         return self.title
