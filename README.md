@@ -11,7 +11,6 @@ This project is a Learning Management System (LMS) backend application built usi
 - **Assignment Submission:** Allow students to submit assignments and instructors to review them.
 - **Grading:** Assign grades to assignments and track student performance.
 - **Resource Management:** Upload and manage course materials, such as documents and videos.
-- **Discussion Forums:** Enable discussion forums for course-related discussions.
 
 ## URL Endpoints
 
