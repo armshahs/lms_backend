@@ -14,47 +14,46 @@ This project is a Learning Management System (LMS) backend application built usi
 
 ## URL Endpoints
 
+
 ### Authentication
 
-- **Registration:** `/register/`
-- **Login:** `/login/`
-- **Logout:** `/logout/`
+- **Registration:** `api/v1/users/`
+- **Login:** `api/v1/token/login/`
+- **Logout:** `api/v1/token/logout/`
+
 
 ### Courses
 
-- **Create Course:** `/course/create/`
-- **Edit Course:** `/course/<course_id>/edit/`
-- **Delete Course:** `/course/<course_id>/delete/`
+- **Course categories List:** `api/v1/courses/get_categories/`
+- **Courses List:** `api/v1/courses/`
+- **Courses List (with category as query param):** `api/v1/courses/?category_id=<uuid:id>`
+- **Get latest courses:** `api/v1/courses/latest/`
+- **Create Course:** `api/v1/courses/create/`
+- **Create Lesson:** `api/v1/courses/create-lesson/<course-slug>/`
+- **Course detail lesson view:** `api/v1/courses/<course-slug>/`
 
-### Users
 
-- **Create User:** `/user/create/`
-- **Edit User:** `/user/<user_id>/edit/`
-- **Delete User:** `/user/<user_id>/delete/`
 
-### Assignments
+### Activity
 
-- **Create Assignment:** `/assignment/create/`
-- **Edit Assignment:** `/assignment/<assignment_id>/edit/`
-- **Delete Assignment:** `/assignment/<assignment_id>/delete/`
+- **Get active courses:** `api/v1/activities/get_active_courses/`
+- **Course track started:** `api/v1/activities/track_started/<slug:course_slug>/<slug:lesson_slug>/`
+- **Course mark as done:** `api/v1/activities/mark_as_done/<slug:course_slug>/<slug:lesson_slug>/`
 
-### Grades
 
-- **Assign Grade:** `/grade/assign/`
-- **Edit Grade:** `/grade/<grade_id>/edit/`
-- **Delete Grade:** `/grade/<grade_id>/delete/`
+### Comments
 
-### Resources
+- **Create Comment:** `api/v1/courses/<slug:course_slug>/<slug:lesson_slug>/`
+- **Get comments:** `api/v1/courses/<slug:course_slug>/<slug:lesson_slug>/get-comments/`
 
-- **Upload Resource:** `/resource/upload/`
-- **Edit Resource:** `/resource/<resource_id>/edit/`
-- **Delete Resource:** `/resource/<resource_id>/delete/`
 
-### Discussion Forums
+### Quiz
 
-- **Create Forum:** `/forum/create/`
-- **Edit Forum:** `/forum/<forum_id>/edit/`
-- **Delete Forum:** `/forum/<forum_id>/delete/`
+- **Get quiz:** `api/v1/courses/<slug:course_slug>/<slug:lesson_slug>/get-quiz/`
+
+
+
+
 
 
 ## Installation
