@@ -7,9 +7,8 @@ This project is a Learning Management System (LMS) backend application built usi
 ## Features
 
 - **Course Management:** Create, edit, and manage courses.
-- **User Management:** Manage users, including students, instructors, and administrators.
-- **Assignment Submission:** Allow students to submit assignments and instructors to review them.
-- **Grading:** Assign grades to assignments and track student performance.
+- **User Management:** Manage users, including students and instructors.
+- **Quiz:** Allow students to take quizzes and automatically review them.
 - **Resource Management:** Upload and manage course materials, such as documents and videos.
 
 ## URL Endpoints
@@ -30,6 +29,7 @@ This project is a Learning Management System (LMS) backend application built usi
 - **Get latest courses:** `api/v1/courses/latest/`
 - **Create Course:** `api/v1/courses/create/`
 - **Create Lesson:** `api/v1/courses/create-lesson/<course-slug>/`
+- **Get author course:** `api/v1/courses/get_author_courses/<int:user_id>/`
 - **Course detail lesson view:** `api/v1/courses/<course-slug>/`
 
 
@@ -99,9 +99,7 @@ python manage.py runserver
 
 1. Register for a new account or login if you already have one.
 2. Create courses by navigating to the Courses section and adding course details.
-3. Enroll users in courses as students or instructors.
-4. Create assignments and set deadlines for submission.
-5. Grade assignments submitted by students and provide feedback.
+3. View and complete course material as a student. Add comments on lessons if needed.
 6. Upload course materials and resources for students.
 
 ## Contributing
